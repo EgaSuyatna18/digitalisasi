@@ -8,9 +8,17 @@
 </div>
 <div class="card-body">
     <section id="content-types">
-        <button type="button" class="btn btn-outline-success block mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
-            Tambah Item
-        </button>
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-outline-success block mb-3" data-bs-toggle="modal" data-bs-target="#addModal" style="font-size: 15px;">
+                Tambah Item
+            </button>
+            <form id="searchForm">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nama Item" aria-describedby="button-addon2" id="key">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="searchForm.action = '/item/'+key.value+'/search'"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
         <div class="row">
             
             @foreach ($items as $item)
@@ -41,6 +49,10 @@
                 </div>
 
             @endforeach
+
+            <div>
+                {{ $items->links() }}
+            </div>
         </div>
     </section>
 </div>
@@ -65,7 +77,7 @@
                     </div>
                     <div class="mb-3">
                         <label>Nama</label>
-                        <input type="text" name="nama" minlength="6" maxlength="50" class="form-control" required>
+                        <input type="text" name="nama" minlength="3" maxlength="50" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label>Informasi</label>
@@ -104,6 +116,10 @@
                 <p id="info"></p>
             </div>
             <div class="modal-footer">
+                <a class="btn btn-info" id="scanqr" target="_blank">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Scan QR</span>
+                </a>
                 <button type="button" class="btn" data-bs-dismiss="modal">
                     <i class="bx bx-x d-block d-sm-none"></i>
                     <span class="d-none d-sm-block">Close</span>
@@ -167,7 +183,7 @@
                     </div>
                     <div class="mb-3">
                         <label>Nama</label>
-                        <input type="text" name="nama" id="updateNama" minlength="6" maxlength="50" class="form-control" required>
+                        <input type="text" name="nama" id="updateNama" minlength="3" maxlength="50" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label>Informasi</label>
@@ -197,6 +213,7 @@
     <script src="/assets/mazer/extensions/jquery/jquery.min.js"></script>
     <script>
         function setInfo(btn, infoValue) {
+            scanqr.href = '{{ config('app.url') . '/get_item/' }}' + btn.getAttribute('data-id');
             info.innerHTML = infoValue;
             nama.innerHTML = btn.getAttribute('data-nama');
 

@@ -25,7 +25,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="index.html"><img src="/assets/mazer/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                <a href="/dashboard">Digitalisasi</a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -164,11 +164,10 @@
 <footer>
     <div class="footer clearfix mb-0 text-muted">
         <div class="float-start">
-            <p>2023 &copy; Mazer</p>
+            <p>2024 &copy; Digitalisasi</p>
         </div>
         <div class="float-end">
-            <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                by <a href="https://saugi.me">Saugi</a></p>
+            <p>Digitalisasi Gedung BRIN</p>
         </div>
     </div>
 </footer>

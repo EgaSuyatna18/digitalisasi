@@ -29,11 +29,13 @@ class UserController extends Controller
     }
 
     function destroy(User $user) {
+        if($user->role == 'useradmin') return redirect(route('user_index'))->withErrors(['error' => 'Gagal Mengubah User.']);
         $user->delete();
         return redirect(route('user_index'))->with('success', 'Berhasil menghapus user.');
     }
 
     function update(User $user, Request $request) {
+        if($user->role == 'useradmin') return redirect(route('user_index'))->withErrors(['error' => 'Gagal Mengubah User.']);
         $rules = [
             'name' => 'required|string|min:2|max:50',
             'username' => 'required|string|min:6|max:12|unique:users',

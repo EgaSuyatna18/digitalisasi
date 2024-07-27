@@ -23,8 +23,8 @@ class ItemController extends Controller
     function store(Request $request) {
         $validated = $request->validate([
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'nama' => 'required|string|min:6|max:50|unique:items',
-            'info' => 'required|string'
+            'nama' => 'required|string|min:3|max:50|unique:items',
+            'info' => 'required|string|not_regex:/[\'"]/'
         ]);
 
         $validated['id'] = (string) Str::uuid();
@@ -43,8 +43,8 @@ class ItemController extends Controller
 
     function update(Item $item, Request $request) {
         $rules = [
-            'nama' => 'required|string|min:6|max:50',
-            'info' => 'required|string|not_regex:/[()\'"]/',
+            'nama' => 'required|string|min:3|max:50',
+            'info' => 'required|string|not_regex:/[\'"]/',
         ];
 
         if($request->file('foto')) $rules['foto'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
@@ -64,5 +64,11 @@ class ItemController extends Controller
     function getItem(Item $item) {
         $title = config('app.name') . ' | Info: ' . $item->nama;
         return view('dashboard.get_item', compact('title', 'item'));
+    }
+
+    function search($key) {
+        $title = config('app.name') . ' | Item';
+        $items = Item::where('nama', 'like', "%$key%")->paginate(9);
+        return view('dashboard.item', compact('title', 'items'));
     }
 }

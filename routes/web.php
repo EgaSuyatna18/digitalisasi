@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/get_item/{item}', [ItemController::class, 'getItem'])->name('get_item');
 
+    Route::get('/item/{key}/search', [ItemController::class, 'search'])->name('search_item');
+
     Route::post('/logout', function(Request $request): RedirectResponse {
         Log::info('Melakukan logout. waktu: {waktu} username: {username}', ['waktu' => Date('d-m-Y h:i:s a'), 'username' => Auth::user()->username]);
         Auth::logout();
